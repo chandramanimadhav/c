@@ -1,41 +1,33 @@
- // Delete a node in Linked list
- #include<stdio.h>
- #include<conio.h>
- #include<stdlib.h>
- #include<assert.h>
- struct node
- {
-        int data;
-        struct node *next;
- };
- void push(struct node** head_ref, int new_data)
- {
-      struct node *new_node =(struct node*) malloc(sizeof(struct node));
-      new_node->data = new_data;
-      new_node->next = (*head_ref);
-      (*head_ref) = new_node;
- }
- void printList(struct node *head)
- {
-      struct node *temp = head;
-      while (temp != NULL)
-      {
-            printf("%d ",temp->data);
-            temp = temp->next;
-      }
- }
- int GetNth(struct node* head, int index)
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+struct node
 {
-    struct node* current = head;
-    int count = 0;
-    while (current != NULL)
-    {
-       if (count == index)
-          return(current->data);
-       count++;
-       current = current->next;
-    }
-    assert(0);              
+       int data;
+       struct node *next;
+};
+void push(struct node** head_ref, int new_data)
+{
+     struct node *new_node =(struct node*) malloc(sizeof(struct node));
+     new_node->data = new_data;
+     new_node->next = (*head_ref);
+     (*head_ref) = new_node;
+}
+void printList(struct node *head)
+{
+     struct node *temp = head;
+     while (temp != NULL)
+     {
+           printf("%d ",temp->data);
+           temp = temp->next;
+     }
+}
+void deleteNode(struct node *node_ptr)
+{
+     struct node *temp = node_ptr->next;
+     node_ptr->data = temp->data;
+     node_ptr->next = temp->next;
+     free(temp);
 }
 void deleteNode(struct node **head_ptr, int index) {
     struct node *temp = (*head_ptr);
@@ -77,8 +69,11 @@ int main() {
 	push(&head,1);
 	printf("\nBefore deleting linked list is: ");
 	printList(head);
-	printf("Enter index to be delete : ");
+	printf("\nEnter index to be delete : ");
 	scanf("%d", &index);
     deleteNode(&head, index);
+    printf("\nAfter deleting linked list is: ");
+    printList(head);
     getch();
 }
+   
