@@ -66,6 +66,12 @@ void segregateEvenOdd(struct node **head_ref)
         new_end->next = end;
     }
     return;
+    while(curr == NULL)
+    {
+         prev = NULL;
+         prev->next = NULL;
+    }
+         
 }
 int main()
 {
